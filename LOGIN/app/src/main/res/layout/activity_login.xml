@@ -113,6 +113,11 @@
             android:layout_marginTop="@dimen/layout_margin_top"
             android:background="@drawable/shape_rectangle"
             android:text="@string/lb1_create_account" />
+        <android.support.design.widget.CoordinatorLayout
+            android:id="@+id/snackbarCoordinatorLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
 
     </LinearLayout>
+
 </LinearLayout>

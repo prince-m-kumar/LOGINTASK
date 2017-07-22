@@ -1,4 +1,4 @@
-package com.princekumar.zolo.uitls.validation;
+package com.princekumar.zolo.uitls;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
