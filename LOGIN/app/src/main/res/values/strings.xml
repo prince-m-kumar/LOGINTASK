@@ -7,4 +7,16 @@
     <string name="lbl_forget_password">Forget Password ?</string>
     <string name="lb1_create_account">CREATE ACCOUNT</string>
     <string name="lbl_hint_password">PASSWORD</string>
+
+    <!--Registration Screen-->
+
+    <string name="lbR_register">R e g i s t e r</string>
+    <string name="msg_please_register_with_zolo_to_continue">Please register with zolo to continue</string>
+    <string name="msg_please_enter_your_registered_email">Please enter your register email</string>
+    <string name="lbl_your_number">YOUR NUMBER</string>
+    <string name="lbl_your_email">YOUR EMAIL</string>
+    <string name="lbl_your_name">YOUR NAME</string>
+    <string name="lbl_set_password">SET PASSWORD</string>
+    <string name="lbl_referral_code">REFERRAL CODE</string>
+    <string name="lbl_reset_password">RESET PASSWORD</string>
 </resources>
