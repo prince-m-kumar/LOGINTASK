@@ -1,12 +1,18 @@
-package com.princekumar.zolo;
+package com.princekumar.zolo.ui;
 
 import android.app.ProgressDialog;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+
+import com.princekumar.zolo.BuildConfig;
+import com.princekumar.zolo.R;
+import com.princekumar.zolo.uitls.validation.EntryFieldValidation;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -43,6 +49,9 @@ public class LoginActivity extends AppCompatActivity {
                 }
             });
         }
+        etPhoneNumber.addTextChangedListener(mTextWatcher);
+        etLoginPassword.addTextChangedListener(mTextWatcher);
+        checkFieldsForEmptyValues();
     }
 
 
@@ -61,5 +70,36 @@ public class LoginActivity extends AppCompatActivity {
     public void createAccountTapped(View view){
         Timber.d("btn_create_account clicked");
 
+    }
+
+    /*Login Screen Validation*/
+    private TextWatcher mTextWatcher = new TextWatcher() {
+        @Override
+        public void beforeTextChanged(CharSequence charSequence, int i, int i2, int i3) {
+        }
+
+        @Override
+        public void onTextChanged(CharSequence charSequence, int i, int i2, int i3) {
+        }
+
+        @Override
+        public void afterTextChanged(Editable editable) {
+            // check Fields For Empty Values
+            checkFieldsForEmptyValues();
+        }
+    };
+
+    void checkFieldsForEmptyValues(){
+        EntryFieldValidation entryFieldValidation=new EntryFieldValidation();
+        String s1 = etPhoneNumber.getText().toString();
+        String s2 = etLoginPassword.getText().toString();
+
+        if(entryFieldValidation.passwordValidate(s2)&&entryFieldValidation.phoneNumberValidate(s1)){
+            btnLogin.setEnabled(true);
+            btnLogin.setBackgroundColor(getResources().getColor(R.color.colorYellow));
+        } else {
+            btnLogin.setEnabled(false);
+            btnLogin.setBackgroundColor(getResources().getColor(R.color.colorYellowLight));
+        }
     }
 }

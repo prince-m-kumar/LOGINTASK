@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".LoginActivity">
+    tools:context=".ui.LoginActivity">
 
     <ImageView
         android:id="@+id/imageView"
@@ -50,6 +50,7 @@
                     android:backgroundTint="@color/colorWhite"
                     android:fontFamily="monospace"
                     android:inputType="phone"
+                    android:maxLength="10"
                     android:textColor="@color/colorWhite" />
             </android.support.design.widget.TextInputLayout>
         </LinearLayout>
