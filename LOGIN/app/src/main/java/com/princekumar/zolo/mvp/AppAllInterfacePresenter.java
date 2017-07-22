@@ -10,4 +10,9 @@ public class AppAllInterfacePresenter {
 
     }
 
+    public interface IRegistrationPresenter {
+        void attemptRegistration(String phoneNumber, String emailID, String name, String passsword,String referalCode);
+
+    }
+
 }

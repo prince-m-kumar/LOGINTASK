@@ -19,4 +19,14 @@
     <string name="lbl_set_password">SET PASSWORD</string>
     <string name="lbl_referral_code">REFERRAL CODE</string>
     <string name="lbl_reset_password">RESET PASSWORD</string>
+
+
+
+    <string name="msg_error_phone_validation">Please Enter 10 Digit Phone Number</string>
+    <string name="msg_error_email_validation">Please Enter Proper EmailID</string>
+    <string name="msg_error_name_validation">Please Enter Proper Name</string>
+    <string name="msg_error_password_validation">Password should contain Upper and lower Case, SpecialChar, Number</string>
+    <string name="msg_error_user_already_exits">User Already Registered</string>
+    <string name="msg_user_registration_success">User Registration Success</string>
+
 </resources>

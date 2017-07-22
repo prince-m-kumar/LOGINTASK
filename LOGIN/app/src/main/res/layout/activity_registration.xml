@@ -78,6 +78,7 @@
                         android:backgroundTint="@color/colorWhite"
                         android:fontFamily="monospace"
                         android:inputType="phone"
+                        android:maxLength="10"
                         android:textColor="@color/colorWhite" />
 
                 </android.support.design.widget.TextInputLayout>

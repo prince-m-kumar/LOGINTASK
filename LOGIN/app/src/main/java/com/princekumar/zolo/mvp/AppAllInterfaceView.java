@@ -11,4 +11,11 @@ public class AppAllInterfaceView {
         void loginFailed(int errorCode);
     }
 
+    public interface IRegistrationView {
+        void navigateLoginActivity();
+        void registrationFailed(int errorCode);
+
+    }
+
+
 }

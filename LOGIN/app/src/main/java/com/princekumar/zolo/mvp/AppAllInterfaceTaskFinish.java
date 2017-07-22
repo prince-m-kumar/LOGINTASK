@@ -10,5 +10,9 @@ public class AppAllInterfaceTaskFinish {
         void onSuccess();
     }
 
+    public interface OnRegistrationFinishedListener {
+        void onRegError(int errorCode);
+        void onRegSuccess();
+    }
 
 }
