@@ -2,6 +2,7 @@ package com.princekumar.zolo.mvp.Presenter;
 
 import android.content.Context;
 
+import com.princekumar.zolo.data.entity.User;
 import com.princekumar.zolo.mvp.AppAllInterfacePresenter;
 import com.princekumar.zolo.mvp.AppAllInterfaceTaskFinish;
 import com.princekumar.zolo.mvp.AppAllInterfaceView;
@@ -34,7 +35,7 @@ public class AppLoginPresenter implements AppAllInterfacePresenter.ILoginPresent
     }
 
     @Override
-    public void onSuccess() {
-        view.navigateToProfileActivity();
+    public void onSuccess(User user) {
+        view.navigateToProfileActivity(user);
     }
 }

@@ -1,5 +1,7 @@
 package com.princekumar.zolo.mvp;
 
+import com.princekumar.zolo.data.entity.User;
+
 /**
  * Created by princ on 22-07-2017.
  */
@@ -7,7 +9,7 @@ package com.princekumar.zolo.mvp;
 public class AppAllInterfaceView {
 
     public interface ILoginView {
-        void navigateToProfileActivity();
+        void navigateToProfileActivity(User user);
         void loginFailed(int errorCode);
     }
 

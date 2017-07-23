@@ -31,9 +31,11 @@ import static com.princekumar.zolo.constant.ErrorCode.ERROR_PHONE_NUMBER_VALIDAT
 import static com.princekumar.zolo.constant.ErrorCode.ERROR_USER_ALREADY_EXIT;
 import static com.princekumar.zolo.constant.ErrorCode.USER_AVAILABLE;
 import static com.princekumar.zolo.constant.ErrorCode.USER_NOT_AVAILABLE;
+import static com.princekumar.zolo.constant.ErrorCode.USER_PASSWORD_INVALID;
 import static com.princekumar.zolo.constant.ErrorCode.USER_PASSWORD_VALID;
 import static com.princekumar.zolo.constant.ErrorCode.USER_REGISTRATION_SUCCESS;
 import static com.princekumar.zolo.constant.ErrorCode.SUCCESS_VALIDATION;
+import static com.princekumar.zolo.constant.ErrorCode.VALID_USER_LOGIN_DATA;
 
 /**
  * Created by princ on 22-07-2017.
@@ -49,13 +51,11 @@ public class AsyncAppInteractor {
         this.context = context;
     }
 
-    public void validateCredentialsAsync(final AppAllInterfaceTaskFinish.OnLoginFinishedListener listener, final String phoneNumber, final String password){
+    public void validateCredentialsAsync(final AppAllInterfaceTaskFinish.OnLoginFinishedListener listener,
+                                         final String phoneNumber, final String password){
         this.clickListener = listener;
-       if (phoneNumber.length()==10){
-           clickListener.onSuccess();
-       }else {
-           clickListener.onError(ERROR_PHONE_NUMBER_VALIDATION);
-       }
+        LoginActivityAsync task = new LoginActivityAsync(UserAppDatabase.getAppDatabase(context), phoneNumber,password);
+        task.execute();
     }
 
     public void validateRegistrationCredentialsAsync(final AppAllInterfaceTaskFinish.OnRegistrationFinishedListener listener,
@@ -161,6 +161,55 @@ public class AsyncAppInteractor {
     private static String emailContent(){
         newPassword=newGeneratedPassword();
         return "Your New Password: " +newPassword;
+    }
+
+    private class LoginActivityAsync extends AsyncTask<Void, Void, Integer> {
+
+        private final UserAppDatabase mDb;
+        private final String phoneNumber;
+        private final String password;
+        private User user;
+
+        LoginActivityAsync(UserAppDatabase db, String phoneNumber,String password) {
+            mDb = db;
+            this.phoneNumber = phoneNumber;
+            this.password=password;
+            //Timber.d("Inside Pre PopulateDbAsync " + userData.toString());
+        }
+
+        @Override
+        protected void onPreExecute() {
+            Timber.d("Inside Pre Execute");
+            super.onPreExecute();
+        }
+
+        @Override
+        protected Integer doInBackground(final Void... params) {
+            int responseCode = checkUser(mDb, phoneNumber);
+            Timber.d("Inside doInBackground" + responseCode);
+            if (USER_AVAILABLE==responseCode){
+                User dbUserData=getUserData(mDb,phoneNumber);
+                if (passwordMatch(password,dbUserData.getUserPassword())){
+                    responseCode=VALID_USER_LOGIN_DATA;
+                    user=dbUserData;
+                }else {
+                    responseCode=USER_PASSWORD_INVALID;
+                }
+
+            }
+            return responseCode;
+        }
+
+        @Override
+        protected void onPostExecute(Integer responseCode) {
+            Timber.d("Inside onPostExecute" + responseCode);
+            if (responseCode == VALID_USER_LOGIN_DATA) {
+                clickListener.onSuccess(user);
+            } else {
+                clickListener.onError(responseCode);
+            }
+            super.onPostExecute(responseCode);
+        }
     }
 
 

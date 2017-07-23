@@ -6,6 +6,7 @@ package com.princekumar.zolo.constant;
 
 public class ErrorCode {
     public static final int SUCCESS_VALIDATION = 100;
+    public static final int VALID_USER_LOGIN_DATA=200;
     public static final int ERROR_PHONE_NUMBER_VALIDATION = 101;
     public static final int ERROR_EMAIL_VALIDATION = 102;
     public static final int ERROR_NAME_VALIDATION = 103;

@@ -1,6 +1,7 @@
 package com.princekumar.zolo.ui;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Build;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.Snackbar;
@@ -106,6 +107,8 @@ public class PasswordResetActivity extends AppCompatActivity implements AppAllIn
     public void navigateToLoginActivity() {
         progressDialog.dismiss();
         Timber.d("Inside navigateToLoginActivity ");
+        Intent myIntent = new Intent(PasswordResetActivity.this, LoginActivity.class);
+        PasswordResetActivity.this.startActivity(myIntent);
     }
 
     @Override

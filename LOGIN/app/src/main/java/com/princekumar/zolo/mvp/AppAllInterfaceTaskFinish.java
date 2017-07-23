@@ -1,5 +1,7 @@
 package com.princekumar.zolo.mvp;
 
+import com.princekumar.zolo.data.entity.User;
+
 /**
  * Created by princ on 22-07-2017.
  */
@@ -7,7 +9,7 @@ package com.princekumar.zolo.mvp;
 public class AppAllInterfaceTaskFinish {
     public interface OnLoginFinishedListener {
         void onError(int errorCode);
-        void onSuccess();
+        void onSuccess(User user);
     }
 
     public interface OnRegistrationFinishedListener {

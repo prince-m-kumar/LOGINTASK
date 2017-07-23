@@ -1,6 +1,7 @@
 package com.princekumar.zolo.ui;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Build;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.Snackbar;
@@ -83,9 +84,8 @@ public class RegistrationActivity extends AppCompatActivity implements AppAllInt
     @Override
     public void navigateLoginActivity() {
         progressDialog.dismiss();
-        Timber.d("Inside navigateLoginActivity ");
-
-
+        Intent myIntent = new Intent(RegistrationActivity.this, LoginActivity.class);
+        RegistrationActivity.this.startActivity(myIntent);
     }
 
     @Override

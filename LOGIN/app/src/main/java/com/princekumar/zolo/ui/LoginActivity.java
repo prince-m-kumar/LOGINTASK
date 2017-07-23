@@ -1,5 +1,6 @@
 package com.princekumar.zolo.ui;
 
+import android.content.Intent;
 import android.os.Build;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.Snackbar;
@@ -15,6 +16,8 @@ import android.widget.TextView;
 
 import com.princekumar.zolo.BuildConfig;
 import com.princekumar.zolo.R;
+import com.princekumar.zolo.constant.ErrorMessage;
+import com.princekumar.zolo.data.entity.User;
 import com.princekumar.zolo.mvp.Presenter.AppLoginPresenter;
 import com.princekumar.zolo.mvp.AppAllInterfaceView;
 import com.princekumar.zolo.uitls.EntryFieldValidation;
@@ -80,12 +83,15 @@ public class LoginActivity extends AppCompatActivity implements AppAllInterfaceV
     @OnClick(R.id.btn_forget_password)
     public void forgetPasswordTapped(View view){
         Timber.d("btn_forget_password clicked");
-
+        Intent myIntent = new Intent(LoginActivity.this, PasswordResetActivity.class);
+        LoginActivity.this.startActivity(myIntent);
 
     }
     @OnClick(R.id.btn_create_account)
     public void createAccountTapped(View view){
         Timber.d("btn_create_account clicked");
+        Intent myIntent = new Intent(LoginActivity.this, RegistrationActivity.class);
+        LoginActivity.this.startActivity(myIntent);
 
     }
 
@@ -121,11 +127,11 @@ public class LoginActivity extends AppCompatActivity implements AppAllInterfaceV
     }
 
     @Override
-    public void navigateToProfileActivity() {
-        Timber.d("navigateToProfileActivity mean Success");
+    public void navigateToProfileActivity(User user) {
+        Timber.d("navigateToProfileActivity mean Success"+user.toString());
         Snackbar snackbar = Snackbar.make(
                 snackbarCoordinatorLayout,
-                "Login Success",
+                "Login Success"+user.toString(),
                 Snackbar.LENGTH_LONG);
         View view = snackbar.getView();
         TextView tv = (TextView) view.findViewById(android.support.design.R.id.snackbar_text);
@@ -140,9 +146,16 @@ public class LoginActivity extends AppCompatActivity implements AppAllInterfaceV
     @Override
     public void loginFailed(int errorCode) {
         Timber.d("loginFailed " +errorCode);
+        notification(errorCode);
+    }
+
+
+    private void notification(int errorCode){
+        ErrorMessage errorMessage=new ErrorMessage(LoginActivity.this);
+        String message=errorMessage.getErrorMessage(errorCode);
         Snackbar snackbar = Snackbar.make(
                 snackbarCoordinatorLayout,
-                "Login Fail" +errorCode,
+                message,
                 Snackbar.LENGTH_LONG);
         View view = snackbar.getView();
         TextView tv = (TextView) view.findViewById(android.support.design.R.id.snackbar_text);
@@ -150,6 +163,8 @@ public class LoginActivity extends AppCompatActivity implements AppAllInterfaceV
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
             tv.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
         }
+
         snackbar.show();
     }
+
 }
