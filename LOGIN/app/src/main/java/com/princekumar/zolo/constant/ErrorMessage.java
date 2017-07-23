@@ -4,11 +4,17 @@ import android.content.Context;
 
 import com.princekumar.zolo.R;
 
+import static com.princekumar.zolo.constant.ErrorCode.EMAIL_FAILURE_SEND;
+import static com.princekumar.zolo.constant.ErrorCode.EMAIL_SUCCESSFUL_SEND;
 import static com.princekumar.zolo.constant.ErrorCode.ERROR_EMAIL_VALIDATION;
 import static com.princekumar.zolo.constant.ErrorCode.ERROR_NAME_VALIDATION;
 import static com.princekumar.zolo.constant.ErrorCode.ERROR_PHONE_NUMBER_VALIDATION;
 import static com.princekumar.zolo.constant.ErrorCode.ERROR_PASSWORD_VALIDATION;
 import static com.princekumar.zolo.constant.ErrorCode.ERROR_USER_ALREADY_EXIT;
+import static com.princekumar.zolo.constant.ErrorCode.USER_AVAILABLE;
+import static com.princekumar.zolo.constant.ErrorCode.USER_NOT_AVAILABLE;
+import static com.princekumar.zolo.constant.ErrorCode.USER_PASSWORD_INVALID;
+import static com.princekumar.zolo.constant.ErrorCode.USER_PASSWORD_VALID;
 import static com.princekumar.zolo.constant.ErrorCode.USER_REGISTRATION_SUCCESS;
 
 
@@ -38,6 +44,18 @@ public class ErrorMessage {
             message=context.getResources().getString(R.string.msg_error_user_already_exits);
         else if (USER_REGISTRATION_SUCCESS==errorCode)
             message=context.getResources().getString(R.string.msg_user_registration_success);
+        else if (USER_NOT_AVAILABLE == errorCode)
+            message = context.getResources().getString(R.string.msg_user_not_available);
+        else if (USER_AVAILABLE == errorCode)
+            message=context.getResources().getString(R.string.msg_user_available);
+        else if (USER_PASSWORD_VALID==errorCode)
+            message=context.getResources().getString(R.string.msg_user_password_valid);
+        else if (USER_PASSWORD_INVALID == errorCode)
+            message=context.getResources().getString(R.string.msg_user_password_invalid);
+        else if (EMAIL_SUCCESSFUL_SEND==errorCode)
+            message=context.getResources().getString(R.string.msg_email_send);
+        else if (EMAIL_FAILURE_SEND==errorCode)
+            message=context.getResources().getString(R.string.msg_email_fail);
         return message;
 }
 }

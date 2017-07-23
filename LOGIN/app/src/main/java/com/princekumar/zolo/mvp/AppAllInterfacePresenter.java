@@ -15,4 +15,9 @@ public class AppAllInterfacePresenter {
 
     }
 
+    public interface IResetPasswordPresenter {
+        void attemptResetPassword(String emailID);
+    }
+
+
 }

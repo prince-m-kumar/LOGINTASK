@@ -15,4 +15,10 @@ public class AppAllInterfaceTaskFinish {
         void onRegSuccess();
     }
 
+    public interface OnResetPasswordListener {
+        void resetPasswordError(int errorCode);
+        void resetPasswordSuccess();
+    }
+
+
 }

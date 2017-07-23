@@ -28,5 +28,14 @@
     <string name="msg_error_password_validation">Password should contain Upper and lower Case, SpecialChar, Number</string>
     <string name="msg_error_user_already_exits">User Already Registered</string>
     <string name="msg_user_registration_success">User Registration Success</string>
+    <string name="msg_user_not_available">Enter Registered EmailID</string>
+    <string name="msg_user_available">User Already Registered</string>
+    <string name="msg_user_password_valid">User Password Valid</string>
+    <string name="msg_email_send">New Generated Password Send to Email </string>
+    <string name="msg_email_fail">Email Fail</string>
+    <string name="msg_user_password_invalid">User Password not Valid</string>
+
+    <string name="sender_email_id">princ.prince@gmail.com</string>
+    <string name="sender_email_password">Singh@123</string>
 
 </resources>

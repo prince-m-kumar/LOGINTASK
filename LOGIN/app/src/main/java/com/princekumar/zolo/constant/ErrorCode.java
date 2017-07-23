@@ -17,4 +17,10 @@ public class ErrorCode {
     public static final int USER_NOT_AVAILABLE =107;
     public static final int USER_AVAILABLE=108;
 
+    public static final int USER_PASSWORD_VALID =109;
+    public static final int USER_PASSWORD_INVALID=110;
+
+    public static final int EMAIL_SUCCESSFUL_SEND=111;
+    public static final int EMAIL_FAILURE_SEND =112;
+
 }

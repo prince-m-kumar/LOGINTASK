@@ -17,5 +17,11 @@ public class AppAllInterfaceView {
 
     }
 
+    public interface IResetPasswordView {
+        void navigateToLoginActivity();
+        void resetPassword(int errorCode);
+    }
+
+
 
 }

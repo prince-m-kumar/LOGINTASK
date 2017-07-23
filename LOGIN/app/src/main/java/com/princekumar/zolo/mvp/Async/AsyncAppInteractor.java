@@ -3,18 +3,35 @@ package com.princekumar.zolo.mvp.Async;
 import android.content.Context;
 import android.os.AsyncTask;
 
+import com.princekumar.zolo.R;
 import com.princekumar.zolo.data.UserAppDatabase;
 import com.princekumar.zolo.data.entity.User;
 import com.princekumar.zolo.mvp.AppAllInterfaceTaskFinish;
 import com.princekumar.zolo.uitls.EntryFieldValidation;
+import com.princekumar.zolo.uitls.RandomPasswordGenerateor;
+
+import java.util.Properties;
+
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.PasswordAuthentication;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 
 import timber.log.Timber;
 
+import static com.princekumar.zolo.constant.ErrorCode.EMAIL_FAILURE_SEND;
+import static com.princekumar.zolo.constant.ErrorCode.EMAIL_SUCCESSFUL_SEND;
 import static com.princekumar.zolo.constant.ErrorCode.ERROR_EMAIL_VALIDATION;
 import static com.princekumar.zolo.constant.ErrorCode.ERROR_NAME_VALIDATION;
 import static com.princekumar.zolo.constant.ErrorCode.ERROR_PASSWORD_VALIDATION;
 import static com.princekumar.zolo.constant.ErrorCode.ERROR_PHONE_NUMBER_VALIDATION;
 import static com.princekumar.zolo.constant.ErrorCode.ERROR_USER_ALREADY_EXIT;
+import static com.princekumar.zolo.constant.ErrorCode.USER_AVAILABLE;
+import static com.princekumar.zolo.constant.ErrorCode.USER_NOT_AVAILABLE;
+import static com.princekumar.zolo.constant.ErrorCode.USER_PASSWORD_VALID;
 import static com.princekumar.zolo.constant.ErrorCode.USER_REGISTRATION_SUCCESS;
 import static com.princekumar.zolo.constant.ErrorCode.SUCCESS_VALIDATION;
 
@@ -23,9 +40,11 @@ import static com.princekumar.zolo.constant.ErrorCode.SUCCESS_VALIDATION;
  */
 
 public class AsyncAppInteractor {
-    private Context context;
+    static private Context context;
     AppAllInterfaceTaskFinish.OnLoginFinishedListener clickListener;
     AppAllInterfaceTaskFinish.OnRegistrationFinishedListener onRegistrationFinishedListener;
+    AppAllInterfaceTaskFinish.OnResetPasswordListener  resetPasswordListener;
+    private static String newPassword;
     public AsyncAppInteractor(Context context) {
         this.context = context;
     }
@@ -58,6 +77,13 @@ public class AsyncAppInteractor {
         }
     }
 
+    public void resetPasswordAsync(final AppAllInterfaceTaskFinish.OnResetPasswordListener listener, final String emaiID){
+        this.resetPasswordListener = listener;
+        PopulateDbResetPasswordAsync task=new PopulateDbResetPasswordAsync(UserAppDatabase.getAppDatabase(context), emaiID);
+        task.execute();
+    }
+
+
     private int regValidation(String phoneNumber, String emailID, String name, String passsword) {
         EntryFieldValidation entryFieldValidation = new EntryFieldValidation();
         int errorCode = 0;
@@ -78,14 +104,66 @@ public class AsyncAppInteractor {
 
     private static int addUser(final UserAppDatabase db, User user) {
         Timber.d("Inside addUser " + (db.userDao().findByPhone(user.getUserPhone()) == null));
+        Timber.d("Inside addUser " + db.userDao().findByPhone(user.getUserPhone()));
         if (db.userDao().findByPhone(user.getUserPhone()) == null) {
             db.userDao().insertAll(user);
         } else {
+            Timber.d(getUserData(db,user.getUserPhone()).toString());
             return ERROR_USER_ALREADY_EXIT;
         }
         return USER_REGISTRATION_SUCCESS;
 
     }
+
+    private static int checkUser(final UserAppDatabase db, String userPhoneNumber) {
+        Timber.d("Inside checkUser " + (db.userDao().findByPhone(userPhoneNumber) == null));
+        if (db.userDao().findByPhone(userPhoneNumber) == null) {
+            return USER_NOT_AVAILABLE;
+        } else {
+            return USER_AVAILABLE;
+        }
+    }
+    private static int checkUserByEmailID(final UserAppDatabase db, String emailID) {
+        Timber.d("Inside checkUser " + (db.userDao().findByEmailID(emailID) == null));
+        if (db.userDao().findByEmailID(emailID) == null) {
+            return USER_NOT_AVAILABLE;
+        } else {
+            return USER_AVAILABLE;
+        }
+    }
+
+    private static User getUserDataByEmailID(final UserAppDatabase db, String emailID) {
+        Timber.d("Inside getUserData " + db.userDao().findByEmailID(emailID).toString());
+        return db.userDao().findByEmailID(emailID);
+    }
+
+    private static User getUserData(final UserAppDatabase db, String userPhoneNumber) {
+        Timber.d("Inside getUserData " + db.userDao().findByPhone(userPhoneNumber).toString());
+        return db.userDao().findByPhone(userPhoneNumber);
+    }
+    private static boolean passwordMatch(String loginPassword,String userPassword){
+        Timber.d("Inside passwordMatch " + (loginPassword.equals(userPassword)));
+        return loginPassword.equals(userPassword);
+    }
+    private static boolean updateUserData(final UserAppDatabase db, User user){
+        db.userDao().updateUser(user);
+        User newUserData=getUserDataByEmailID(db,user.getUserEmailID());
+        return passwordMatch(newUserData.getUserPassword(),newPassword);
+    }
+
+    private static String newGeneratedPassword(){
+        RandomPasswordGenerateor passwordGenerateor=new RandomPasswordGenerateor();
+        // int randomPassword   =(int)(Math.random()*9000)+100000;
+        String emailPassword  =passwordGenerateor.generateRandomStringPassword();
+        return emailPassword;
+    }
+
+    private static String emailContent(){
+        newPassword=newGeneratedPassword();
+        return "Your New Password: " +newPassword;
+    }
+
+
 
     private class PopulateDbAsync extends AsyncTask<Void, Void, Integer> {
 
@@ -118,6 +196,82 @@ public class AsyncAppInteractor {
                 onRegistrationFinishedListener.onRegSuccess();
             } else {
                 onRegistrationFinishedListener.onRegError(responseCode);
+            }
+            super.onPostExecute(responseCode);
+        }
+    }
+
+
+
+    private class PopulateDbResetPasswordAsync extends AsyncTask<Void, Void, Integer> {
+        private Properties props;
+        private final UserAppDatabase mDb;
+        private final String emailID;
+        PopulateDbResetPasswordAsync(UserAppDatabase db, String emailID) {
+            mDb = db;
+            this.emailID=emailID;
+        }
+
+        @Override
+        protected void onPreExecute() {
+            props = new Properties();
+            props.put("mail.smtp.auth", "true");
+            props.put("mail.smtp.starttls.enable", "true");
+            props.put("mail.smtp.host", "smtp.gmail.com");
+            props.put("mail.smtp.port", "587");
+            Timber.d("Inside Pre Execute");
+            super.onPreExecute();
+        }
+
+        @Override
+        protected Integer doInBackground(final Void... params) {
+            int responseCode = checkUserByEmailID(mDb, emailID);
+            User user;
+            final String senderEmailID=context.getResources().getString(R.string.sender_email_id).toString();
+            final String senderPassword=context.getResources().getString(R.string.sender_email_password).toString();
+            if (responseCode==USER_AVAILABLE){
+                user=getUserDataByEmailID(mDb,emailID);
+                Session session = Session.getInstance(props,
+                        new javax.mail.Authenticator() {
+                            protected PasswordAuthentication getPasswordAuthentication() {
+                                return new PasswordAuthentication(senderEmailID, senderPassword);
+                            }
+                        });
+                try {
+                    Message message = new MimeMessage(session);
+                    message.setFrom(new InternetAddress(senderEmailID));
+                    message.setRecipients(Message.RecipientType.TO,
+                            InternetAddress.parse(emailID));
+                    message.setSubject("New Login Password");
+                    message.setText(emailContent());
+
+                    Transport.send(message);
+
+                    System.out.println("Done");
+
+                    user.setUserPassword(newPassword);
+                    updateUserData(mDb,user);
+
+                    responseCode=EMAIL_SUCCESSFUL_SEND;
+                }catch (MessagingException e){
+                    Timber.e("MessagingException "+e.getMessage());
+                    responseCode=EMAIL_FAILURE_SEND;
+                } catch (Exception e) {
+                    Timber.e(e.getMessage());
+                    responseCode=EMAIL_FAILURE_SEND;
+                }
+            }
+            Timber.d("Inside doInBackground" + responseCode);
+            return responseCode;
+        }
+
+        @Override
+        protected void onPostExecute(Integer responseCode) {
+            Timber.d("Inside onPostExecute" + responseCode);
+            if (responseCode == USER_PASSWORD_VALID) {
+                resetPasswordListener.resetPasswordSuccess();
+            } else {
+                resetPasswordListener.resetPasswordError(responseCode);
             }
             super.onPostExecute(responseCode);
         }
