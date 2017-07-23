@@ -65,6 +65,10 @@ public class ProfileActivity extends AppCompatActivity {
     @OnClick(R.id.btn_profile_edit)
     public void createAccountTapped(View view){
         Timber.d("btn_create_account clicked "+user.toString());
+        Intent myIntent = new Intent(ProfileActivity.this, ProfileEditActivity.class);
+        myIntent.putExtra("USER", user);
+        ProfileActivity.this.startActivity(myIntent);
+
 
 
     }

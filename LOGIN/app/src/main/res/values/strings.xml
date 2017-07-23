@@ -8,6 +8,7 @@
     <string name="lb1_create_account">CREATE ACCOUNT</string>
     <string name="lbl_hint_password">PASSWORD</string>
     <string name="lb1_profile_edit">EDIT</string>
+    <string name="lb1_profile_Update">Save and Update</string>
 
     <!--Registration Screen-->
 

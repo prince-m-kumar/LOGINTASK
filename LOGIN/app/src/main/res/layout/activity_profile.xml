@@ -72,7 +72,6 @@
                     android:gravity="center"
                     android:hint="@string/lbl_your_number"
                     android:paddingStart="16dp"
-                    android:text="Saurabh Padwekar"
                     android:textColor="@color/colorWhite"
                     android:textSize="16sp" />
 
@@ -101,7 +100,6 @@
                     android:gravity="center"
                     android:hint="@string/lbl_your_number"
                     android:paddingStart="16dp"
-                    android:text="lifesavi@gmail.com"
                     android:textColor="@color/colorWhite"
                     android:textSize="16sp" />
 
@@ -129,7 +127,6 @@
                     android:gravity="center"
                     android:hint="@string/lbl_your_number"
                     android:paddingStart="16dp"
-                    android:text="942366894"
                     android:textColor="@color/colorWhite"
                     android:textSize="16sp" />
 
