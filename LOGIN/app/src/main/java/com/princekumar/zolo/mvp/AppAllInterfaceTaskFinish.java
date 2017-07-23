@@ -22,5 +22,9 @@ public class AppAllInterfaceTaskFinish {
         void resetPasswordSuccess();
     }
 
+    public interface OnProfileUpdateFinishedListener {
+        void onProfileUpdateError(int errorCode);
+        void onProfileUpdateSuccess(User user);
+    }
 
 }

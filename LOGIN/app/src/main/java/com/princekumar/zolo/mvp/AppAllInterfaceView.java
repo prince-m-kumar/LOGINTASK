@@ -24,6 +24,12 @@ public class AppAllInterfaceView {
         void resetPassword(int errorCode);
     }
 
+    public interface IProfileUpdateView {
+        void navigateProfileActivity(User user);
+        void updateProfileFailed(int errorCode);
+
+    }
+
 
 
 }

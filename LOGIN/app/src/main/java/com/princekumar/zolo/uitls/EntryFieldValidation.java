@@ -34,7 +34,7 @@ public class EntryFieldValidation {
     }
 
     public boolean phoneNumberValidate(final String phoneNumber){
-        if (phoneNumber.length()!=10||phoneNumber.startsWith("0")){
+        if (phoneNumber.length()!=10&&phoneNumber.startsWith("0")){
             return false;
         }
         return true;

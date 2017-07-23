@@ -162,6 +162,11 @@
         android:background="@color/colorYellow"
         android:text="@string/lb1_profile_Update"
         android:textColor="@color/colorBlack" />
+    <android.support.design.widget.CoordinatorLayout
+        android:id="@+id/snackbarCoordinatorLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"/>
 
 
 </LinearLayout>

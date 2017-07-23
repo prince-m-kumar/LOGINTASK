@@ -11,6 +11,7 @@ import static com.princekumar.zolo.constant.ErrorCode.ERROR_NAME_VALIDATION;
 import static com.princekumar.zolo.constant.ErrorCode.ERROR_PHONE_NUMBER_VALIDATION;
 import static com.princekumar.zolo.constant.ErrorCode.ERROR_PASSWORD_VALIDATION;
 import static com.princekumar.zolo.constant.ErrorCode.ERROR_USER_ALREADY_EXIT;
+import static com.princekumar.zolo.constant.ErrorCode.PROFILE_UPDATE_FAIL;
 import static com.princekumar.zolo.constant.ErrorCode.USER_AVAILABLE;
 import static com.princekumar.zolo.constant.ErrorCode.USER_NOT_AVAILABLE;
 import static com.princekumar.zolo.constant.ErrorCode.USER_PASSWORD_INVALID;
@@ -56,6 +57,9 @@ public class ErrorMessage {
             message=context.getResources().getString(R.string.msg_email_send);
         else if (EMAIL_FAILURE_SEND==errorCode)
             message=context.getResources().getString(R.string.msg_email_fail);
+        else if (PROFILE_UPDATE_FAIL==errorCode)
+            message=context.getResources().getString(R.string.msg_profile_update_fail);
+
         return message;
 }
 }

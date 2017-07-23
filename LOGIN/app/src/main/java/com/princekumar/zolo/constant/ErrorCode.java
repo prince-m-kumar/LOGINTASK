@@ -23,5 +23,7 @@ public class ErrorCode {
 
     public static final int EMAIL_SUCCESSFUL_SEND=111;
     public static final int EMAIL_FAILURE_SEND =112;
+    public static final int PROFILE_UPDATE_FAIL=113;
+    public static final int PROFILE_UPDATE=114;
 
 }

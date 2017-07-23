@@ -36,6 +36,7 @@
     <string name="msg_email_send">New Generated Password Send to Email </string>
     <string name="msg_email_fail">Email Fail</string>
     <string name="msg_user_password_invalid">User Password not Valid</string>
+    <string name="msg_profile_update_fail">User Update Fail</string>
 
     <string name="sender_email_id">princ.prince@gmail.com</string>
     <string name="sender_email_password">Singh@123</string>

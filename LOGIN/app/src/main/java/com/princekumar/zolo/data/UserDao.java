@@ -30,6 +30,9 @@ public interface UserDao {
     @Query("SELECT * FROM User where emailid LIKE  :emailID")
     User findByEmailID(String emailID);
 
+    @Query("SELECT * FROM User where uid LIKE  :uid")
+    User findByID(int uid);
+
     @Query("SELECT COUNT(*) from User")
     int countUser();
 
