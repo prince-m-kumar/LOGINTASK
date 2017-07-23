@@ -7,6 +7,7 @@
     <string name="lbl_forget_password">Forget Password ?</string>
     <string name="lb1_create_account">CREATE ACCOUNT</string>
     <string name="lbl_hint_password">PASSWORD</string>
+    <string name="lb1_profile_edit">EDIT</string>
 
     <!--Registration Screen-->
 
