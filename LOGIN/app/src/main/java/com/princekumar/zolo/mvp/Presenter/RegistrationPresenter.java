@@ -8,11 +8,6 @@ import com.princekumar.zolo.mvp.AppAllInterfaceView;
 import com.princekumar.zolo.mvp.Async.AsyncAppInteractor;
 
 
-
-/**
- * Created by princ on 21-07-2017.
- */
-
 public class RegistrationPresenter implements AppAllInterfacePresenter.IRegistrationPresenter
         ,AppAllInterfaceTaskFinish.OnRegistrationFinishedListener{
 

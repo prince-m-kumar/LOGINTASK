@@ -39,9 +39,6 @@ import static com.princekumar.zolo.constant.ErrorCode.USER_REGISTRATION_SUCCESS;
 import static com.princekumar.zolo.constant.ErrorCode.SUCCESS_VALIDATION;
 import static com.princekumar.zolo.constant.ErrorCode.VALID_USER_LOGIN_DATA;
 
-/**
- * Created by princ on 22-07-2017.
- */
 
 public class AsyncAppInteractor {
     static private Context context;

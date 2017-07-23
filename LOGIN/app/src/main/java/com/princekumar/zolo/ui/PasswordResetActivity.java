@@ -38,8 +38,6 @@ public class PasswordResetActivity extends AppCompatActivity implements AppAllIn
     @BindView(R.id.snackbarCoordinatorLayout)
     CoordinatorLayout snackbarCoordinatorLayout;
 
-
-
     ProgressDialog progressDialog;
     ResetPasswordPresenter passwordPresenter;
 

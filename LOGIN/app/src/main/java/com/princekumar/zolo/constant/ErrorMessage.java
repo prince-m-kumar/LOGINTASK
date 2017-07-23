@@ -18,11 +18,6 @@ import static com.princekumar.zolo.constant.ErrorCode.USER_PASSWORD_INVALID;
 import static com.princekumar.zolo.constant.ErrorCode.USER_PASSWORD_VALID;
 import static com.princekumar.zolo.constant.ErrorCode.USER_REGISTRATION_SUCCESS;
 
-
-/**
- * Created by princ on 22-07-2017.
- */
-
 public class ErrorMessage {
 
     Context context;

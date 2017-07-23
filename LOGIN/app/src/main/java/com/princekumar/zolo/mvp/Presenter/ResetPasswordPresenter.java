@@ -7,9 +7,7 @@ import com.princekumar.zolo.mvp.AppAllInterfaceTaskFinish;
 import com.princekumar.zolo.mvp.AppAllInterfaceView;
 import com.princekumar.zolo.mvp.Async.AsyncAppInteractor;
 
-/**
- * Created by princ on 23-07-2017.
- */
+
 
 public class ResetPasswordPresenter  implements AppAllInterfacePresenter.IResetPasswordPresenter,
         AppAllInterfaceTaskFinish.OnResetPasswordListener {

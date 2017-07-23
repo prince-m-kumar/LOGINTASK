@@ -12,10 +12,6 @@ import com.princekumar.zolo.data.entity.User;
 
 import java.util.List;
 
-/**
- * Created by princ on 21-07-2017.
- */
-
 @Dao
 public interface UserDao {
     @Query("SELECT * FROM User")

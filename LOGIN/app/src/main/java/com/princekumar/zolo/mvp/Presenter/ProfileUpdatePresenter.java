@@ -9,10 +9,6 @@ import com.princekumar.zolo.mvp.AppAllInterfaceTaskFinish;
 import com.princekumar.zolo.mvp.AppAllInterfaceView;
 import com.princekumar.zolo.mvp.Async.AsyncAppInteractor;
 
-/**
- * Created by princ on 23-07-2017.
- */
-
 public class ProfileUpdatePresenter implements AppAllInterfacePresenter.IUpdateProfilePresenter, AppAllInterfaceTaskFinish.OnProfileUpdateFinishedListener {
     private AppAllInterfaceView.IProfileUpdateView view;
     private AsyncAppInteractor interactor;

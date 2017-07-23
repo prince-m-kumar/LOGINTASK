@@ -3,9 +3,6 @@ package com.princekumar.zolo.uitls;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-/**
- * Created by princ on 22-07-2017.
- */
 
 public class EntryFieldValidation {
     private Pattern pattern;
@@ -21,11 +18,6 @@ public class EntryFieldValidation {
         pattern = Pattern.compile(PASSWORD_PATTERN);
     }
 
-    /**
-     * Validate password with regular expression
-     * @param password password for validation
-     * @return true valid password, false invalid password
-     */
     public boolean passwordValidate(final String password){
 
         matcher = pattern.matcher(password);

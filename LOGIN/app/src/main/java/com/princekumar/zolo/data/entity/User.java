@@ -6,9 +6,7 @@ import android.arch.persistence.room.PrimaryKey;
 
 import java.io.Serializable;
 
-/**
- * Created by princ on 21-07-2017.
- */
+
 
 @Entity(tableName = "User")
 public class User  implements Serializable {

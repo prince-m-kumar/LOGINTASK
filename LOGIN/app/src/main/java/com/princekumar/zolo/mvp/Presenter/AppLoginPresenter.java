@@ -8,10 +8,6 @@ import com.princekumar.zolo.mvp.AppAllInterfaceTaskFinish;
 import com.princekumar.zolo.mvp.AppAllInterfaceView;
 import com.princekumar.zolo.mvp.Async.AsyncAppInteractor;
 
-/**
- * Created by princ on 22-07-2017.
- */
-
 public class AppLoginPresenter implements AppAllInterfacePresenter.ILoginPresenter, AppAllInterfaceTaskFinish.OnLoginFinishedListener {
     private AppAllInterfaceView.ILoginView view;
     private AsyncAppInteractor interactor;

@@ -2,10 +2,6 @@ package com.princekumar.zolo.uitls;
 
 import java.util.Random;
 
-/**
- * Created by princ on 22-07-2017.
- */
-
 public class RandomPasswordGenerateor {
     private static final String CHAR_LIST_CAP =
             "ABCDEFGHIJKLMNOPQRSTUVWXYZ";

@@ -130,18 +130,6 @@ public class LoginActivity extends AppCompatActivity implements AppAllInterfaceV
     @Override
     public void navigateToProfileActivity(User user) {
         Timber.d("navigateToProfileActivity mean Success"+user.toString());
-        Snackbar snackbar = Snackbar.make(
-                snackbarCoordinatorLayout,
-                "Login Success"+user.toString(),
-                Snackbar.LENGTH_LONG);
-        View view = snackbar.getView();
-        TextView tv = (TextView) view.findViewById(android.support.design.R.id.snackbar_text);
-        tv.setTextColor(ContextCompat.getColor(LoginActivity.this, android.R.color.holo_green_dark));
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
-            tv.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
-        }
-
-        snackbar.show();
         Intent myIntent = new Intent(LoginActivity.this, ProfileActivity.class);
         myIntent.putExtra("USER", user);
         LoginActivity.this.startActivity(myIntent);

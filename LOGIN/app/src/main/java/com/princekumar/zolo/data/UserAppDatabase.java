@@ -10,12 +10,6 @@ import android.content.Context;
 
 import com.princekumar.zolo.data.entity.User;
 
-
-/**
- * Created by princ on 21-07-2017.
- */
-
-
 @Database(entities = {User.class}, version = 1,exportSchema = false)
 public abstract class UserAppDatabase extends RoomDatabase {
 
@@ -26,8 +20,6 @@ public abstract class UserAppDatabase extends RoomDatabase {
         if (INSTANCE == null) {
             INSTANCE =
                     Room.databaseBuilder(context.getApplicationContext(), UserAppDatabase.class, "User")
-                            // allow queries on the main thread.
-                            // Don't do this on a real app! See PersistenceBasicSample for an example.
                             .allowMainThreadQueries()
                             .build();
         }

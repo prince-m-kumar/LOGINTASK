@@ -81,7 +81,6 @@ public class ProfileEditActivity extends AppCompatActivity implements AppAllInte
         user.setUserEmailID(email);
         Timber.d("onProfileUpdateSuccess New Data" +user.toString());
         updatePresenter.attemptProfileUpdate(user);
-        // Pass user event straight to presenter
 
     }
 

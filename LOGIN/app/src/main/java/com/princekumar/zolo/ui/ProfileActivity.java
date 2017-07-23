@@ -68,9 +68,6 @@ public class ProfileActivity extends AppCompatActivity {
         Intent myIntent = new Intent(ProfileActivity.this, ProfileEditActivity.class);
         myIntent.putExtra("USER", user);
         ProfileActivity.this.startActivity(myIntent);
-
-
-
     }
 
 

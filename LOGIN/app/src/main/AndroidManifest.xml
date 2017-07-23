@@ -24,22 +24,19 @@
         <activity
             android:name=".ui.RegistrationActivity"
             android:screenOrientation="portrait" android:launchMode="standard" android:noHistory="true">
-
-
         </activity>
+
         <activity
             android:name=".ui.PasswordResetActivity"
             android:screenOrientation="portrait" android:launchMode="standard" android:noHistory="true">
-
-
         </activity>
+
         <activity android:name=".ui.ProfileActivity" android:screenOrientation="portrait"
             android:launchMode="standard" android:noHistory="true">
-
         </activity>
+
         <activity android:name=".ui.ProfileEditActivity" android:screenOrientation="portrait"
             android:launchMode="standard" >
-
         </activity>
     </application>
 
