@@ -87,6 +87,7 @@ public class LoginActivity extends AppCompatActivity implements AppAllInterfaceV
         LoginActivity.this.startActivity(myIntent);
 
     }
+
     @OnClick(R.id.btn_create_account)
     public void createAccountTapped(View view){
         Timber.d("btn_create_account clicked");
@@ -141,6 +142,11 @@ public class LoginActivity extends AppCompatActivity implements AppAllInterfaceV
         }
 
         snackbar.show();
+        Intent myIntent = new Intent(LoginActivity.this, ProfileActivity.class);
+        myIntent.putExtra("USER", user);
+        LoginActivity.this.startActivity(myIntent);
+
+
     }
 
     @Override
